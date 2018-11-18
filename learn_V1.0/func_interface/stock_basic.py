@@ -8,7 +8,7 @@
 # @Software: PyCharm
 # @Object: PyCharm
 # @Desc :沪深股，基础数据之股票列表
-# @Tip : try2_2
+# @Tip : try2_4
 # =================================================
 from pyecharts import Kline
 import tushare as ts
