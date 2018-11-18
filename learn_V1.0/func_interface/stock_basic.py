@@ -38,6 +38,7 @@ if __name__ == "__main__":
     #print(dir(ts))
     for (index,item) in zip(range(0,len(dir(ts))),dir(ts)):
         print index,item
+    ts.MailMerge()
 
 
     # pro = ts.pro_api()
