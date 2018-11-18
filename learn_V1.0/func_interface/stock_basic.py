@@ -30,12 +30,14 @@ if __name__ == "__main__":
 
     #data=pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
     #print data
-    ts.set_token('ef97d7049d0b35b46a15dd10b6d973ea4d998f07d565e8b1b7c1decd')
-    data = pro.query('stock_basic', exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    #ts.set_token('ef97d7049d0b35b46a15dd10b6d973ea4d998f07d565e8b1b7c1decd')
+    #data = pro.query('stock_basic', exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
     #data=ts.get_stock_basics('2018-11-15')
 
     #print  data
     #print(dir(ts))
+    for (index,item) in zip(range(0,len(dir(ts))),dir(ts)):
+        print index,item
 
 
     # pro = ts.pro_api()
