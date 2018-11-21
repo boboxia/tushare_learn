@@ -301,51 +301,154 @@ get_zz500s,获取中证500成份股
 
 global_realtime,全球实时指数
 
+guba_sina,获取sina财经股吧首页的重点消息
+返回，消息标题，消息内容（show_content=True的情况下），发布时间，阅读次数
+
+inst_detail,获取最近一个交易日机构席位成交明细统计数据
+返回，股票代码，股票名称 ，交易日期 ，机构席位买入额(万) ，机构席位卖出额(万) 
+
+inst_tops,获取机构席位追踪统计数据
+返回，股票代码，名称，累积买入额(万)，买入次数，累积卖出额(万)，卖出次数，净额(万)
+
+is_holiday,判断是否为交易日，返回True or False
+
+latest_content,获取即时财经新闻内容
+返回新闻的文字内容
+lpr_data,获取贷款基础利率（LPR）
+返回,日期,1年贷款基础利率
+
+lpr_ma_data,获取贷款基础利率均值数据
+返回,日期,5日均值,10日均值,20日均值
+
+margin_detail,沪深融券融券明细
+返回,证券代码, 证券名称, 今日买入额,融资余额,今日卖出量（股）,融券余量（股）,融券余额,融资融券余额(元),本日融资偿还额(元),本日融券偿还量
+margin_offset,融资融券可充抵保证金证券
+返回,证券代码,证券名称
+margin_target,沪深融券融券标的
+返回,证券代码,证券名称,融资标的,融券标的
+
+margin_zsl,融资融券充抵保证金折算率
+broker:
+gtja:国泰君安
+yhzq:银河证券
+gfzq：广发证券
+zszq：招商证券
+gxzq：国信证券
+swhy：申万宏源
+zxjt：中信建投
+zxzq：中信证券
+返回，证券代码，证券名称，比率，券商代码
+
+moneyflow_hsgt,获取沪深港通资金流向
+返回,
+交易日期
+ggt_ss: 港股通(沪)
+ggt_sz: 港股通(深)
+hgt: 沪港通
+sgt: 深港通
+north_money: 北向资金流入
+south_money: 南向资金流入
+
+month_boxoffice,获取单月电影票房数据
+返回,排名,电影名称,口碑指数,平均票价,场均人次,月度占比,单月票房(万)  ,月内天数,上映日期
+
+new_cbonds,获取可转债申购列表
+返回,债券代码,债券名称,股票代码,股票名称,申购代码,发行总数(亿元),最新市场价格,转股价格,首日收盘价,上网发行日期,上市日期,中签率(%),打新收益率(%),每中一股收益（万元）
+
+new_stocks,获取新股上市数据
+返回,股票代码,申购代码,名称,上网发行日期,上市日期,发行数量(万股),上网发行数量(万股),发行价格(元),发行市盈率,个人申购上限(万股),募集资金(亿元),网上中签率(%)
+
+notice_content,获取信息地雷内容
+返回，信息内容
+pledged_detail,股票质押数据
+返回,证券代码, 证券名称,公告日期,出质人,质权人,质押数量,质押日期,解除日期
+
+pro_api,初始化pro API,第一次可以通过ts.set_token('your token')来记录自己的token凭证，临时token可以通过本参数传入
+
+pro_bar,BAR数据
+返回,股票代码，开盘close/high/low/vol成交量/amount成交额/maN均价/vr量比/tor换手率
+ 期货(asset='X'),code/open/close/high/low/avg_price：均价  position：持仓量  vol：成交总量
+
+profit_data,获取分配预案数据
+返回,股票代码,股票名称,分配年份,公布日期,分红金额（每10股）,转增和送股数（每10股）
+profit_divis,获取分送送股数据
+返回,代码,证券简称 ,分配年度 ,送股 ,转增股,送转总数 ,派现,预案公布日,股权登记日,除权除息日,事件进程 ,预案或实施,公告日期
+
+quotes,获取实时快照
+返回,实时快照，5档行情
+
+realtime_boxoffice,获取实时电影票房数据
+返回,   实时票房（万） ,排名,影片名 ,票房占比 （%）,上映天数,累计票房（万） ,数据获取时间
+reset_instrument,重新设置本地证券列表
+
+sh_margin_details,获取沪市融资融券明细列表
+返回,信用交易日期,标的证券代码,标的证券简称,本日融资余额(元),本日融资买入额(元),本日融资偿还额(元),本日融券余量,本日融券卖出量,本日融券偿还量
+sh_margins,获取沪市融资融券数据列表
+返回,信用交易日期,本日融资余额(元),本日融资买入额(元),本日融券余量,本日融券余量金额(元),本日融券卖出量,本日融资融券余额(元)
+
+shibor_data,获取上海银行间同业拆放利率（Shibor）
+返回,日期,隔夜拆放利率,1周拆放利率,2周拆放利率,1个月拆放利率,3个月拆放利率,6个月拆放利率,9个月拆放利率,1年拆放利率
+shibor_ma_data,获取Shibor均值数据
+返回,日期,其它分别为各周期5、10、20均价
 
 
+shibor_quote_data,获取Shibor银行报价数据
+date:日期
+    bank:报价银行名称
+    ON:隔夜拆放利率
+    ON_B:隔夜拆放买入价
+    ON_A:隔夜拆放卖出价
+    1W_B:1周买入
+    1W_A:1周卖出
+    2W_B:买入
+    2W_A:卖出
+    1M_B:买入
+    1M_A:卖出
+    3M_B:买入
+    3M_A:卖出
+    6M_B:买入
+    6M_A:卖出
+    9M_B:买入
+    9M_A:卖出
+    1Y_B:买入
+    1Y_A:卖出
 
-91 guba_sina
-92 inst_detail
-93 inst_tops
-94 internet
-95 is_holiday
-96 latest_content
-97 lpr_data
-98 lpr_ma_data
-99 margin_detail
-100 margin_offset
-101 margin_target
-102 margin_zsl
-103 moneyflow_hsgt
-104 month_boxoffice
-105 new_cbonds
-106 new_stocks
-107 notice_content
-108 os
-109 pledged_detail
-110 pro
-111 pro_api
-112 pro_bar
-113 profit_data
-114 profit_divis
-115 quotes
-116 realtime_boxoffice
-117 reset_instrument
-118 set_token
-119 sh_margin_details
-120 sh_margins
-121 shibor_data
-122 shibor_ma_data
-123 shibor_quote_data
-124 stock
-125 stock_issuance
-126 stock_pledged
-127 sz_margin_details
-128 sz_margins
-129 tick
-130 top10_holders
-131 top_list
-132 trade_cal
-133 trader
-134 util
-135 xsg_data
+
+stock_issuance,股票增发
+返回,证券代码,证券名称,类型，定向增发/公开增发,数量,增发价格,最近收盘价,增发日期,上市日期,锁定年数,截止当前溢价(%)
+stock_pledged,股票质押数据
+返回,证券代码,证券名称,质押次数,无限售股质押数量(万),限售股质押数量(万),总股本,质押比例（%）
+
+
+sz_margin_details,获取深市融资融券明细列表
+返回,信用交易日期,标的证券代码,标的证券简称,融资买入额(元),融资余额(元), 融券卖出量,融券余量,融券余量(元),融资融券余额(元)
+
+sz_margins,获取深市融资融券数据列表
+返回,信用交易日期(index), 融资买入额(元),融资余额(元), 融券卖出量, 融券余量,融券余量(元),融资融券余额(元)
+
+tick，tick数据
+asset:证券品种，E:沪深交易所股票和基金, INDEX:沪深交易所指数， X:其他证券品种，大致如下：
+支持的扩展行情包括(asset='X')：
+郑州商品期权         OZ 大连商品期权         OD 上海商品期权         OS
+上海个股期权         QQ 香港指数         FH 郑州商品         QZ 大连商品         QD 上海期货         QS
+香港主板         KH 香港权证         KR 开放式基金         FU 货币型基金         FB
+招商理财产品         LC 招商货币产品         LB 国际指数         FW 国内宏观指标         HG 中国概念股         CH
+美股知名公司         MG B股转H股         HB 股份转让         SB 股指期货         CZ 香港创业板         KG 香港信托基金         KT
+国债预发行         GY 主力期货合约         MA
+中证指数         ZZ 港股通         GH
+market:市场代码，通过ts.get_markets()获取
+返回，日期,时间,成交价,成交量
+type:买卖方向，0-买入 1-卖出 2-集合竞价成交
+期货  0:开仓  1:多开   -1:空开
+期货多一列数据oi_change:增仓数据
+
+
+top10_holders
+top_list,获取每日龙虎榜列表
+返回,股票代码,名称,涨跌幅,龙虎榜成交额(万),买入额(万),占总成交比例,卖出额(万),占总成交比例,上榜原因,日期
+trade_cal,交易日历
+isOpen=1是交易日，isOpen=0为休市
+
+
+xsg_data,获取限售股解禁数据
+返回,股票代码,名称,解禁日期,解禁数量（万股）,占总盘比率
