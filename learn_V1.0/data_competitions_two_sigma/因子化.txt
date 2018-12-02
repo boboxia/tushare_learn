@@ -1,0 +1,193 @@
+'UID','day','time','channel',''device_code2','device_code3','device1','device2','mac1','ip1','ip1_sub','geo_code','trans_amt','bal','amtsrc1','amt_src2','trans_type2','trans_type1','market_code','market_type','merchant','code1','code2','acc_id1','acc_id2','acc_id3'
+
+根据分布，考虑如何因子化
+train_X_tr['amt_src1'].value_counts()
+c5fc631370cabc0d    63299
+155c9e1c32bd0fa2    54548
+4d7831c6f695ab19    53530
+f29829bc82459191    24651
+992d3ce08a4ca702    15332
+a571c7fda8b7df37    14433
+9451ef3c5a0d6807    12047
+acdbdb842ac20f1e    12017
+fd4d2d1006a95637     5284
+8c9987909b3e95a4     3651
+27c42480134c0d02     3281
+b3acdf321be07351      517
+767001914a988cfb      469
+b0a5496f0db7f70a      447
+8c753ae7afb60e61      414
+3045dd7701f3e263      185
+8576ce2e7ab65ac2      141
+0b747ef141d49c8c      110
+9a1fad6202fd1a24       78
+d7de70fc65292e41       63
+79b1dd31895a6278       47
+d4f7a3699ef02458       46
+d46a2a9577fb52c3       20
+47b415a384665f45       17
+4ec06e4d12f8560d       12
+295eadbc19cddb04        7
+41c767468d03b4ac        6
+f2500fa92c7e39b9        2
+
+train_X_tr['amt_src1'].value_counts() 为None值的归为0，在2-185归为1，在517-414归为2，上面各类依次3，4，5，6依次
+
+train_X_tr['amt_src2'].value_counts()
+9fefed0a981dcb7a    35370
+9a8ee16bde15e38a    28167
+cf6e3a074407c379    20478
+a2aa73cdb6621133    18023
+e2a24888724d3e89     4099
+8f7eb30a47b8af8c     3939
+c4ec9622cf5c6e55     3698
+1ca672c7cb34af43     3678
+e98d66cbb6c099b5     3480
+e7bed445b4f874ac     3421
+12e06cb81b0fcf2a     2792
+4a4fdbd7ae5655cd     2118
+8d2ff85b6fd5dc78     1901
+d46a2a9577fb52c3     1265
+fbf6bf3c8927414c     1160
+7bbedaeb92ef822e     1123
+00aba2124ca7287b      581
+58d462f1d9cb53db      564
+6ff95b0f27cad429      447
+021826a651647c36      418
+eb41d44c679aca42      408
+e86309711bd84312      334
+e4cc53e1c547ea4e      293
+83a5fc4359a7615b      238
+c82bae1f6ebe5674      215
+974bf14359ae6ea1      195
+97dcb4af128ef1aa      189
+dab069dbd480cd71      181
+a4c431a553511705      180
+d8330ac4b2914269      173
+2f60693e4248d7d2      162
+c55f5f148f1c1abb      157
+976b3aa484a47bd1      141
+82f4d0fd9cab9334      121
+c8892baa65246479      109
+6278e75195070f21      109
+01d2df370ace8ce4      108
+3da0b889868f3405      103
+6d62c8c3c4f9cc5f      101
+1f51c35a27115cba       98
+5a83c1d4ab42abc2       87
+13292ee4e696c589       79
+c2fdf7471a6cc990       76
+b043c42fe279a658       75
+2136b4461fb6c224       71
+8bc98262cc5fbc5b       67
+079946f395cc0cf1       63
+419321219d8fda58       63
+22502c4fdab5857d       61
+a3b3a0b25af8bbae       59
+e6bbde1a9a1bf932       58
+4f5258b3973074f6       56
+877d454e64e02516       53
+5d796942ba29acc9       45
+cbd532f4b11349a4       44
+4b594afc831ed84b       43
+1a193bb512629fc4       42
+6c254f2237b37187       35
+272354ea34edeeff       29
+7d649bc3418fce10       28
+6e98d274f5bcf050       27
+153284e982638d6e       27
+a9edadc983f95061       27
+8209da9991c852ed       27
+0547014ab9e148fa       26
+73c7f904ea116c58       21
+6548776fa38df56a       19
+b401dbdaafdf8ee0       19
+5acca0b358699292       18
+601d00011c07f5b6       17
+6e659e2adea4a956       16
+aaca3b1b66f818f0       16
+a92a6771d36ba51f       13
+04df8fd93f494d24       13
+cd533df8d1d89ef3       11
+36fed1e95dcc258e       11
+86a5346b276f44ad       10
+2a293a54ef081091       10
+b05d85fa949e845c       10
+2de20840e2f911b6        9
+ed428d991d3186db        8
+2eca5e7ed39909cd        8
+ca5c4ffef592032b        8
+d8f4194741730162        7
+260bbac26657ae8b        7
+dea7e09a621abba3        7
+74072040495fc3b2        5
+1d382217d9768976        5
+b8470c94a0ddbeef        5
+c9b350566f7b10f6        5
+3d43d5b9cd99cd23        5
+51ab6d34c8b83c81        4
+dd88eccc91b0a59c        4
+d1cf9d547a0ccdce        4
+cabb2b36d820ea07        4
+ffa5e1f9dc4d4401        3
+a24cedec085b3935        3
+e14a75fb6f6f8fba        3
+882cbf0e73b044b5        2
+24a694166aa50f34        2
+ae0026a2aafb8c47        2
+e672ce3c277257f2        2
+e213ad88986da79b        2
+af2f4b682a4a42a1        2
+fe6fc8729fe20bca        2
+24ab096e6dbd002a        2
+d3e06b27c88bc8ec        2
+6f29a6043704a402        1
+a6233b9f50dd6128        1
+d50a16623d3068a6        1
+8af1293c81a52bc0        1
+3b1930622ab93271        1
+06f06ecbea4d4462        1
+9619b4bf83b2e884        1
+1b0c14b31e521a36        1
+Name: amt_src2, dtype: int64
+train_X_tr['amt_src2'].value_counts() 为null 归为0 在1-98 为1，101-581为2，1123到35370依次为3，4，5。。。。
+train_X_tr['amt_src2']银行卡类型太多还是不做因子化了，统计个数即可
+
+train_X_tr['trans_type2'].value_counts(),线上线下
+105.0    139482
+102.0     67185
+104.0     19933
+103.0      2900
+Name: trans_type2, dtype: int64，还有一种是空值，记为0,其他1，2，3，4，或者_105
+
+train_X_tr['trans_type1'].value_counts()，消费类型，消费还是退款等
+c2f2023d279665b2    171676
+6d55c54c8b1056fb     44316
+61bfb66c928f36ac     18628
+26bcf43a19df14c8     12017
+e0d7b8768da99dd4      9263
+d9c417304a5ae70c      2870
+9d7dd7b80e806024      2130
+a19e7a8951e54c06      1038
+ced62357ad496957       925
+eb8d10591677bbe1       633
+4adc3de71fe1a83c       447
+85bced5214d33ad2       423
+e903cf2a79b83d37       161
+fd4d2d1006a95637       110
+3f469aa3836e71cb        17
+Name: trans_type1, dtype: int64 还有一种是空值，记为0,其他1，2，3，4，先转再因子化
+
+train_X_tr['market_code'].value_counts(),营销活动id太多不适合做因子化，
+train_X_tr['market_type'].value_counts()
+2.0    18001
+1.0    12024
+Name: market_type, dtype: int64 营销类型id一定化因子化，还有一种是空值，记为0
+
+train_X_tr['channel'].value_counts()
+140    175067
+102     83102
+118      5284
+119      1056
+106       145
+平台，渠道，5种，加上空值6种，适合因子化
