@@ -172,7 +172,7 @@ if __name__=='__main__':
     b = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] + ([-1] * (len(a) - 11))
     #[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
     #取计数为前11的amt_src1为012345678910，后面的全取为-1
-    #然后，pandas值替换函数repalce
+    #然后，pandas值替换函数repalce,dicts=dict(zip(a,b)),train_X_tr['amt_src1'] = train_X_tr['amt_src1'].map(a, b)
     train_X_tr['amt_src1'] = train_X_tr['amt_src1'].replace(a, b)
     train_X_tr['amt_src1'].head(10)
     #至此完成 amt_src1的交易资金来源类型，余额，花呗做因子化，后面做groupby[uid,amt_src1]
@@ -187,49 +187,49 @@ if __name__=='__main__':
     # train_X_tr_uid1_count.head(5)
 
     #2，groupby uid，xx(因子量)取金额均值（最大，最小等等）
-    train_X_tr_uid2_channel_bal = train_X_tr.groupby(['UID', 'channel'])['trans_bal'].agg(
+    train_X_tr_uid2_channel_amt = train_X_tr.groupby(['UID', 'channel'])['trans_amt'].agg(
         {'mean', 'max', 'min'}).add_prefix(
         'bal_channel_').unstack()
-    train_X_tr_uid2_channel_bal.columns = [x[0] + "_" + str(x[1]) for x in train_X_tr_uid2_channel_bal.columns.ravel()]
-    train_X_tr_uid2_channel_bal.reset_index(inplace=True)
-    train_X_tr_uid2_channel_bal.fillna(0.0, inplace=True)
-    print(train_X_tr_uid2_channel_bal.head(5))
+    train_X_tr_uid2_channel_amt.columns = [x[0] + "_" + str(x[1]) for x in train_X_tr_uid2_channel_amt.columns.ravel()]
+    train_X_tr_uid2_channel_amt.reset_index(inplace=True)
+    train_X_tr_uid2_channel_amt.fillna(0.0, inplace=True)
+    print(train_X_tr_uid2_channel_amt.head(5))
 
-    train_X_tr_uid2_market_type_bal = train_X_tr.groupby(['UID', 'market_type'])['trans_bal'].agg(
+    train_X_tr_uid2_market_type_amt = train_X_tr.groupby(['UID', 'market_type'])['trans_amt'].agg(
         {'mean', 'max', 'min'}).add_prefix(
         'bal_market_type_').unstack()
-    train_X_tr_uid2_market_type_bal.columns = [x[0] + "_" + str(x[1]) for x in
-                                               train_X_tr_uid2_market_type_bal.columns.ravel()]
-    train_X_tr_uid2_market_type_bal.reset_index(inplace=True)
-    train_X_tr_uid2_market_type_bal.fillna(0.0, inplace=True)
-    print(train_X_tr_uid2_market_type_bal.head(5))
+    train_X_tr_uid2_market_type_amt.columns = [x[0] + "_" + str(x[1]) for x in
+                                               train_X_tr_uid2_market_type_amt.columns.ravel()]
+    train_X_tr_uid2_market_type_amt.reset_index(inplace=True)
+    train_X_tr_uid2_market_type_amt.fillna(0.0, inplace=True)
+    print(train_X_tr_uid2_market_type_amt.head(5))
 
-    train_X_tr_uid2_trans_type2_bal = train_X_tr.groupby(['UID', 'trans_type2'])['trans_bal'].agg(
+    train_X_tr_uid2_trans_type2_amt = train_X_tr.groupby(['UID', 'trans_type2'])['trans_amt'].agg(
         {'mean', 'max', 'min'}).add_prefix(
         'bal_trans_type2_').unstack()
-    train_X_tr_uid2_trans_type2_bal.columns = [x[0] + "_" + str(x[1]) for x in
-                                               train_X_tr_uid2_trans_type2_bal.columns.ravel()]
-    train_X_tr_uid2_trans_type2_bal.reset_index(inplace=True)
-    train_X_tr_uid2_trans_type2_bal.fillna(0.0, inplace=True)
-    print(train_X_tr_uid2_trans_type2_bal.head(5))
+    train_X_tr_uid2_trans_type2_amt.columns = [x[0] + "_" + str(x[1]) for x in
+                                               train_X_tr_uid2_trans_type2_amt.columns.ravel()]
+    train_X_tr_uid2_trans_type2_amt.reset_index(inplace=True)
+    train_X_tr_uid2_trans_type2_amt.fillna(0.0, inplace=True)
+    print(train_X_tr_uid2_trans_type2_amt.head(5))
 
-    train_X_tr_uid2_trans_type1_bal = train_X_tr.groupby(['UID', 'trans_type1'])['trans_bal'].agg(
+    train_X_tr_uid2_trans_type1_amt = train_X_tr.groupby(['UID', 'trans_type1'])['trans_amt'].agg(
         {'mean', 'max', 'min'}).add_prefix(
         'bal_trans_type1_').unstack()
-    train_X_tr_uid2_trans_type1_bal.columns = [x[0] + "_" + str(x[1]) for x in
-                                               train_X_tr_uid2_trans_type1_bal.columns.ravel()]
-    train_X_tr_uid2_trans_type1_bal.reset_index(inplace=True)
-    train_X_tr_uid2_trans_type1_bal.fillna(0.0, inplace=True)
-    print(train_X_tr_uid2_trans_type1_bal.head(5))
+    train_X_tr_uid2_trans_type1_amt.columns = [x[0] + "_" + str(x[1]) for x in
+                                               train_X_tr_uid2_trans_type1_amt.columns.ravel()]
+    train_X_tr_uid2_trans_type1_amt.reset_index(inplace=True)
+    train_X_tr_uid2_trans_type1_amt.fillna(0.0, inplace=True)
+    print(train_X_tr_uid2_trans_type1_amt.head(5))
 
-    train_X_tr_uid2_bal_src1_bal = train_X_tr.groupby(['UID', 'bal_src1'])['trans_bal'].agg(
+    train_X_tr_uid2_amt_src1_amt = train_X_tr.groupby(['UID', 'bal_src1'])['trans_amt'].agg(
         {'mean', 'max', 'min'}).add_prefix(
         'bal_bal_src1_').unstack()
-    train_X_tr_uid2_bal_src1_bal.columns = [x[0] + "_" + str(x[1]) for x in
-                                            train_X_tr_uid2_bal_src1_bal.columns.ravel()]
-    train_X_tr_uid2_bal_src1_bal.reset_index(inplace=True)
-    train_X_tr_uid2_bal_src1_bal.fillna(0.0, inplace=True)
-    print(train_X_tr_uid2_bal_src1_bal.head(5))
+    train_X_tr_uid2_amt_src1_amt.columns = [x[0] + "_" + str(x[1]) for x in
+                                            train_X_tr_uid2_amt_src1_amt.columns.ravel()]
+    train_X_tr_uid2_amt_src1_amt.reset_index(inplace=True)
+    train_X_tr_uid2_amt_src1_amt.fillna(0.0, inplace=True)
+    print(train_X_tr_uid2_amt_src1_amt.head(5))
 
     ####################
     train_X_tr_uid2_channel_bal = train_X_tr.groupby(['UID', 'channel'])['bal'].agg(
@@ -267,14 +267,14 @@ if __name__=='__main__':
     train_X_tr_uid2_trans_type1_bal.fillna(0.0, inplace=True)
     print(train_X_tr_uid2_trans_type1_bal.head(5))
 
-    train_X_tr_uid2_bal_src1_bal = train_X_tr.groupby(['UID', 'amt_src1'])['bal'].agg(
+    train_X_tr_uid2_amt_src1_bal = train_X_tr.groupby(['UID', 'amt_src1'])['bal'].agg(
         {'mean', 'max', 'min'}).add_prefix(
         'amt_bal_src1_').unstack()
-    train_X_tr_uid2_bal_src1_bal.columns = [x[0] + "_" + str(x[1]) for x in
-                                            train_X_tr_uid2_bal_src1_bal.columns.ravel()]
-    train_X_tr_uid2_bal_src1_bal.reset_index(inplace=True)
-    train_X_tr_uid2_bal_src1_bal.fillna(0.0, inplace=True)
-    print(train_X_tr_uid2_bal_src1_bal.head(5))
+    train_X_tr_uid2_amt_src1_bal.columns = [x[0] + "_" + str(x[1]) for x in
+                                            train_X_tr_uid2_amt_src1_bal.columns.ravel()]
+    train_X_tr_uid2_amt_src1_bal.reset_index(inplace=True)
+    train_X_tr_uid2_amt_src1_bal.fillna(0.0, inplace=True)
+    print(train_X_tr_uid2_amt_src1_bal.head(5))
 
     #每个用户只看最近一半的记录
     train_X_tr_dt_mid = train_X_tr[['UID', 'day']].groupby(['UID']).mean().add_suffix("_mid").reset_index()
@@ -282,10 +282,11 @@ if __name__=='__main__':
     train_X_tr.head(5)
     #再重新统计上面记录
 
-    train_X_tr_uid1_day_count = train_X_tr[['day']].groupby(train_X_tr['UID']).count().add_suffix(
-        '_count').reset_index()
-    train_X_tr_uid1_day_count.head(100)
-    ###这样不是分组内，去重统计， 如何分组内去重统计
+    train_X_tr_uid_day = train_X_tr[['UID', 'day']]
+    train_X_tr_uid_day.drop_duplicates(['UID', 'day'], 'first', inplace=True)
+    train_X_tr_uid1_day_count = train_X_tr_uid_day[['day']].groupby(train_X_tr_uid_day['UID']).count().add_suffix('_count').reset_index()
+    train_X_tr_uid1_day_count.head(5)
+    ###这样是分组内，去重统计，
 
     train_X_tr['day_time'] = train_X_tr.apply(lambda x: str(x['day']) + "_" + str(x['time']), axis=1)
     # train_X_tr.head(5)
@@ -293,8 +294,27 @@ if __name__=='__main__':
         '_count').reset_index()
     train_X_tr_uid1_day_time_count.head(100)
 
-    ###这样不是分组内去重
-    train_X_tr.loc[train_X_tr["UID"] == 10001]
+    #######################
+    train_X_tr_uid_day = train_X_tr[['UID', 'day']]
+    train_X_tr_uid_day.drop_duplicates(['UID', 'day'], 'first', inplace=True)
+    train_X_tr_uid1_day_count = train_X_tr_uid_day[['day']].groupby(train_X_tr_uid_day['UID']).count().add_suffix(
+        '_count').reset_index()
+    train_X_tr_uid1_day_count.head(5)
+
+    train_X_tr['day_time'] = train_X_tr.apply(lambda x: str(x['day']) + "_" + str(x['time']), axis=1)
+    train_X_tr_uid1_day_time_count = train_X_tr[['day_time']].groupby(train_X_tr['UID']).count().add_suffix(
+        '_count').reset_index()
+    train_X_tr_uid1_day_time_count.head(5)
+
+
+    count_day_avg = train_X_tr = pd.merge(train_X_tr_uid1_day_time_count, train_X_tr_uid1_day_count, how='left',
+                                          on='UID')
+    train_X_tr_uid1_count_day_avg['count_day_avg'] = train_X_tr_uid1_count_day['day_time_count'] / \
+                                                     train_X_tr_uid1_count_day['day_count']
+    train_X_tr_uid1_count_day_avg.head(5)
+
+
+    #train_X_tr.loc[train_X_tr["UID"] == 10001]
 
     # train_X_tr.loc[train_X_tr["UID"] == 10001]
     # 需要先排序
@@ -303,13 +323,57 @@ if __name__=='__main__':
     train_X_tr['day_shift'] = train_X_tr.groupby('UID')['day'].shift(-1)
     train_X_tr.head(15)
 
+    ### 取每个用户的day 差平均值，最大值，最大值
+    train_X_tr_uid_day_diff_avg = train_X_tr[['UID', 'day_shift']].groupby(['UID']).mean().add_suffix("_mid").reset_index()
+    train_X_tr_uid_day_diff_avg.fillna(0.0, inplace=True)
+    train_X_tr_uid_day_diff_avg.head(5)
+
+    train_X_tr_uid_day_diff_max = train_X_tr[['UID', 'day_shift']].groupby(['UID']).max().add_suffix(
+        "_max").reset_index()
+    train_X_tr_uid_day_diff_max.fillna(0.0, inplace=True)
+    train_X_tr_uid_day_diff_max.head(5)
+
+    train_X_tr_uid_day_diff_min = train_X_tr[['UID', 'day_shift']].groupby(['UID']).min().add_suffix(
+        "_min").reset_index()
+
+    train_X_tr_uid_day_diff_min.fillna(0.0, inplace=True)
+    train_X_tr_uid_day_diff_min.head(5)
+
+    #####统计三张表的uid ，情况以及 关联uid后的label 占比和原label的分布是否一致
+    #train_X_tr_uid_day_diff_avg.shape
+    #train_X_label= pd.read_csv('D:/transaction_risk_competition/tag_train_new.csv')
+    #train_X_label.shape
+    #train_X_label.columns
+    #train_X_label.Tag.value_counts(1)
+    #train_X_tr = pd.merge(train_X_tr_uid_day_diff_min, train_X_label, how='inner', on='UID')
+    #train_X_tr.shape
+    #train_X_tr.Tag.value_counts(1)
+    #train_X_or = pd.read_csv('D:/transaction_risk_competition/operation_train_new.csv')
+    #train_X_or.head(5)
+
+    # train_X_or_uid = train_X_or[['UID']]
+    #train_X_or_uid.drop_duplicates(['UID'], 'first', inplace=True)
+    #train_X_or_uid.reindex()
+    #train_X_or_uid.sort_values(by='UID').head(5)
+    #train_X_or_uid.shape
+
+    # train_X_uid_co = pd.merge(train_X_tr_uid_day_diff_min, train_X_or_uid, how='inner', on='UID')
+    # train_X_uid_co.shape
+    # train_X_uid_co.head(5)
+    # train_X_uid_co_label = pd.merge(train_X_uid_co, train_X_label, how='inner', on='UID')
+    # train_X_uid_co_label.shape
+    # train_X_uid_co_label.Tag.value_counts(1)
 
 
-
-
-
+    ##分组内统计某列的空值占比，用groupby+apply 而不是agg
+    #df.groupby('Mt').apply(lambda t: len(t[t.Count == 0) / len(t[t.Count == 0))
+    #funcs=lambda x:len(x[x['d']==0])/len(x)
+    # df.groupby('Mt').agg('123':funcs)
 
     train_X_tr.head(5)
+
+
+
 
 
 
