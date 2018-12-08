@@ -296,6 +296,13 @@ if __name__=='__main__':
     ###这样不是分组内去重
     train_X_tr.loc[train_X_tr["UID"] == 10001]
 
+    # train_X_tr.loc[train_X_tr["UID"] == 10001]
+    # 需要先排序
+    # train_X_tr['day'] = train_X_tr.groupby('UID')['day'].sort()
+    train_X_tr.sort_values(by=['UID', 'day', 'time'], inplace=True)
+    train_X_tr['day_shift'] = train_X_tr.groupby('UID')['day'].shift(-1)
+    train_X_tr.head(15)
+
 
 
 
