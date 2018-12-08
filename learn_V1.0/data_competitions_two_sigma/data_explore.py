@@ -276,6 +276,29 @@ if __name__=='__main__':
     train_X_tr_uid2_bal_src1_bal.fillna(0.0, inplace=True)
     print(train_X_tr_uid2_bal_src1_bal.head(5))
 
+    #每个用户只看最近一半的记录
+    train_X_tr_dt_mid = train_X_tr[['UID', 'day']].groupby(['UID']).mean().add_suffix("_mid").reset_index()
+    train_X_tr = pd.merge(train_X_tr, train_X_tr_dt_mid, how='left', on='UID')
+    train_X_tr.head(5)
+    #再重新统计上面记录
+
+    train_X_tr_uid1_day_count = train_X_tr[['day']].groupby(train_X_tr['UID']).count().add_suffix(
+        '_count').reset_index()
+    train_X_tr_uid1_day_count.head(100)
+    ###这样不是分组内，去重统计， 如何分组内去重统计
+
+    train_X_tr['day_time'] = train_X_tr.apply(lambda x: str(x['day']) + "_" + str(x['time']), axis=1)
+    # train_X_tr.head(5)
+    train_X_tr_uid1_day_time_count = train_X_tr[['day_time']].groupby(train_X_tr['UID']).count().add_suffix(
+        '_count').reset_index()
+    train_X_tr_uid1_day_time_count.head(100)
+
+    ###这样不是分组内去重
+    train_X_tr.loc[train_X_tr["UID"] == 10001]
+
+
+
+
 
 
 
